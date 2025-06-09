@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="gui" default="true"/>
+
+  <!-- Carrega o modelo URDF do robô -->
+  <param name="robot_description" 
+         command="$(find xacro)/xacro $(find ur5_description)/urdf/ur5_robotiq85_gripper.urdf.xacro"/>
+
+  <!-- Publicador de estados das juntas -->
+  <group if="$(arg gui)">
+    <node name="joint_state_publisher_gui" 
+          pkg="joint_state_publisher_gui" 
+          type="joint_state_publisher_gui"/>
+  </group>
+
+  <group unless="$(arg gui)">
+    <node name="joint_state_publisher" 
+          pkg="joint_state_publisher" 
+          type="joint_state_publisher"/>
+  </group>
+
+  <!-- Publicador do estado do robô (TFs) -->
+  <node name="robot_state_publisher" 
+        pkg="robot_state_publisher" 
+        type="robot_state_publisher"/>
+
+  <!-- Lança o RViz com configuração padrão -->
+  <node name="rviz" 
+        pkg="rviz" 
+        type="rviz" 
+        args="-d $(find ur5_description)/config/ur5.rviz" 
+        required="true"/>
+
+</launch>
+

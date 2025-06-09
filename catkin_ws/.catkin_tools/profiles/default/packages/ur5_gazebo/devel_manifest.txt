@@ -1,0 +1,4 @@
+ur5/ur5_gazebo
+/LabVir_moveit_ur10_lab1/catkin_ws/devel/.private/ur5_gazebo/share/ur5_gazebo/cmake/ur5_gazeboConfig.cmake /LabVir_moveit_ur10_lab1/catkin_ws/devel/share/ur5_gazebo/cmake/ur5_gazeboConfig.cmake
+/LabVir_moveit_ur10_lab1/catkin_ws/devel/.private/ur5_gazebo/share/ur5_gazebo/cmake/ur5_gazeboConfig-version.cmake /LabVir_moveit_ur10_lab1/catkin_ws/devel/share/ur5_gazebo/cmake/ur5_gazeboConfig-version.cmake
+/LabVir_moveit_ur10_lab1/catkin_ws/devel/.private/ur5_gazebo/lib/pkgconfig/ur5_gazebo.pc /LabVir_moveit_ur10_lab1/catkin_ws/devel/lib/pkgconfig/ur5_gazebo.pc

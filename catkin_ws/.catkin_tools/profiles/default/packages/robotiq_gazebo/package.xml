@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>robotiq_gazebo</name>
+  <version>0.1.0</version>
+  <description>
+    Gazebo plugins and wrappers for the Robotiq 85 gripper.
+  </description>
+
+  <maintainer email="oramos@utec.edu.pe">oramos</maintainer>
+  <author email="oramos@utec.edu.pe">oramos</author>
+
+  <license>BSD</license>
+
+  <!-- Build tool -->
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <!-- Build dependencies -->
+  <build_depend>roscpp</build_depend>
+  <build_depend>gazebo_ros</build_depend>
+  <build_depend>control_toolbox</build_depend>
+  <build_depend>boost</build_depend>
+
+  <!-- Run dependencies -->
+  <exec_depend>roscpp</exec_depend>
+  <exec_depend>gazebo_ros</exec_depend>
+  <exec_depend>control_toolbox</exec_depend>
+  <exec_depend>boost</exec_depend>
+
+  <!-- Gazebo dependency -->
+  <depend>gazebo</depend>
+
+  <!-- Export to Gazebo -->
+  <export>
+    <gazebo_ros plugin_path="${prefix}/lib" gazebo_media_path="${prefix}" />
+  </export>
+</package>
