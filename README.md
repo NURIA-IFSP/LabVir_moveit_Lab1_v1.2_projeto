@@ -1,6 +1,74 @@
-# Pick and Place - UR5 + Robotiq gripper
+# Projeto Pick and Place - Cinemática direta com UR5 + Robotiq gripper
 
-Como executar:
+Nesta atividade você deverá tentar implementar a movimentação de um braço robótico UR5 _SEM_ utilizar o MoveIt.
+
+O projeto será implementado em 2 etapas:
+
+1. Pick and Place de um cubo com o UR5
+2. Pick and Place de 03 cubos com o UR5
+
+Para isso você deverá utilizar como ferramentas:
+
+- Script Python: ur5_cinematica_direta.py
+- A aplicação rqt_send_joint_trajectory que posiciona as juntas do UR5 diretamente no Gazebo
+
+--- 
+
+## Etapa 1: Pick and place de um cubo
+
+**Objetivo**:
+- Pegar o cubo pequeno e posicionar ao centro do quadrado maior.
+
+---
+
+Como iniciar o projeto:
+
+1. Execute a aplicação ur5_projeto_etapa1.launch - O Gazebo com o cenário do projeto e o rqt_send_joint vão iniciar
+
+```bash
+roslaunch ur5_gazebo ur5_projeto_etapa1.launch
+
+```
+
+2. Utilize o rqt_send_joint_trajectory para posicionar o braço. Anote os valores dos angulos das juntas.
+
+3. Altere a função principal _main_ da aplicação para definir as posições desejadas do braço robótico:
+
+```python
+# Define positions (in radians)
+    # Position A: Home position
+    pos_a = [0.0, -1.57, 1.57, -1.57, -1.57, 0.0]
+
+```
+As juntas são representadas no vetor na seguinte ordem:
+    ['shoulder_pan_joint', 'shoulder_lift_joint', 'elbow_joint', 'wrist_1_joint', 'wrist_2_joint', 'wrist_3_joint']
+
+
+4. Para executar o script de cinemática direta:
+
+```bash
+rosrun ur5_gazebo ur5_cinematica_direta.py
+
+```
+---
+
+## Etapa 2: Pick and Place com 03 cubos
+
+**Objetivo:**
+Empilhar os 03 cubos pequenos sobre o quadrado maior o mais próximo possível do centro.
+
+1. Execute a aplicação ur5_projeto_etapa2.launch - O Gazebo com o cenário do projeto e o rqt_send_joint vão iniciar
+
+```bash
+roslaunch ur5_gazebo ur5_projeto_etapa2.launch
+
+```
+
+Repita os procedimentos da etapa 01 para posicionar os cubos conforme o  objetivo.
+
+---
+
+### Como executar:
 Você pode executar em sua máquina local ou via GitHub Codespaces. Se for executar no seu computador é necessária a preparação do ambiente local, caso contrário vá para a seção ["Tutorial Via GitHub Codespaces"](#tutorial-via-github-codespaces).
 
 ## Preparação do ambiente na máquina local - git + docker + vscode
@@ -71,81 +139,6 @@ Você pode executar em sua máquina local ou via GitHub Codespaces. Se for execu
 7. Abra um terminal "Applications -> Terminal Emulator"
 
 8. Mude para o diretorio /LabVir_moveit_ur10_lab1/catkin_ws
-
-## Visualização do braço robótico no RVIz
-
-9. Execute o comando:
-
-```bash
-    source devel/setup.bash
-    roslaunch ur5_description display_with_gripper.launch
-```
-
-Como alternativa você pode executar o script que abre e dimensiona as janelas no xfce4:
-    ``bash
-        cd /LabVir_moveit_ur10_lab1/catkin_ws/src/ur10_with_gripper/scripts
-        ./init_view_robot_with_gripper.sh
-    ```
-    
-O RViz deverá abrir com esta tela:
-
-![RViz com UR5 e Garra](./images/readme/ur5_with_gripper_rviz.png)
-
-Você poderá movimentar os slides laterais para movimentação e teste do braço robótico
-
-## Simulação do braço robótico no simulador Gazebo com a garra
-
-1. Para verificar a simulação do UR5 com a garra no Gazebo:
-
-```bash
-    roslaunch ur5_gazebo ur5_gazebo.launch
-```
-
-O Gazebo deverá abrir com esta tela:
-![UR5 Gazebo com a garra](./images/readme/ur5_gazebo_rqt_trajetorias.png)
-
-Para executar a simulação clique no botão "play" no canto inferior esquerdo do gazebo. No rqt_joint_trajectory_controller você
-deverá carregar o controller manager e controllers conforme a figura para controlar o braço robótico.
-
-## Movimentação do braço robótico através de programação Python
-
-Você poderá executar alguns scripts para movimentação do braço robótico.
-
-1. Carregue o braço robótico no ambiente do gazebo com a mesa e os cubos:
-
-```bash
-    roslaunch ur5_gazebo ur5_cubes.launch
-```
-Após iniciar a simulação clicando em "play" no canto inferior esquerdo o Gazebo deverá exibir esta tela:
-
-![UR5 Gazebo com a garra e cubos](./images/readme/ur5_gazebo_cubos.png)
-
-
-Para movimentação da garra, execute o script em um novo terminal:
-
-```bash
-    rosrun ur5_gazebo send_gripper.py --value 0.5
-```
-
-__Importante:__ sempre que for abrir um terminal execute os comandos:
-
-```bash
-    cd catkin_ws
-    source devel/setup.bash
-```
-Ao executar o script você verá a garra se movimentar (valor 0.0 fecha a garra e 0.8 abre)
-
-Este script movimenta o braço robótico:
-
-```bash
-    rosrun ur5_gazebo send_joints.py
-```
-
-A posição que o braço irá se mover é definido dentro do script nesta linha:
-```Python
- pts.positions = [0.0, -2.33, 1.57, 0.0, 0.0, 0.0]
-```
-Altere os valores dos angulos das juntas (em radianos) e veja o que ocorre.
 
 
 ## Tutorial Via GitHub Codespaces
